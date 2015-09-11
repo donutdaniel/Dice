@@ -14,28 +14,37 @@ import java.io.IOException;
 
 public class Dice extends PApplet {
 
+
+int colour=0;
 public void setup()
 {
-	size(610,610);
-	background(255, 255, 255);
+	size(610,650);
+	//background(255, 255, 255);
 	noLoop();
 }
 public void draw()
 {
 	int y1;
 	int x1;
+	int sum=0;
+	background(255);
 	for(y1=10;y1<=600;y1=y1+35) {
 			for(x1=10;x1<=600;x1=x1+35){
 				Die bob = new Die(x1,y1);
 				bob.roll();
 				bob.show();
+				sum=bob.number+sum;
 			}
 			x1=10;
 		}
+		textSize(30);
+		fill(0);
+		text(sum,280,630);
 }
 public void mousePressed()
 {
 	redraw();
+	colour=0;
 }
 class Die //models one single dice cube
 {
@@ -56,7 +65,8 @@ class Die //models one single dice cube
 	
 	public void show()
 	{
-		fill(0);
+		colour=colour+1;
+		fill(colour,0,colour);
 		rect(myX, myY, 30, 30);
 		fill(255);
 			switch (number) {
